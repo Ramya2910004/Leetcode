@@ -33,13 +33,13 @@ public:
         ListNode* second=rev;
         while(second!=NULL){
             if(first->val!=second->val){
-                // reversell(rev);
+                reversell(rev); // restoring original linked list before exiting        because  it is not good to change original input list.
                 return false;
             }
             first=first->next;
             second=second->next;
         }
-        // reversell(rev);
+        reversell(rev);
         return true;
     }
 };
