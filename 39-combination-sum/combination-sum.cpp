@@ -1,33 +1,24 @@
 class Solution {
 public:
-    void comb(vector<int>& nums,int index,int target,vector<vector<int>>& ans,int sum,vector<int>v)
-    {
-    if(index==nums.size()){
-        if(sum==target){
-            ans.push_back(v);
+    void Comb_pair(int index, int target,vector<int>&nums, vector<int>&ans, vector<vector<int>>&comb){
+        if(index==nums.size()){
+            if(target==0){
+                comb.push_back(ans);
+            }
+            return;
         }
-         return;
-    }
-    else if(sum==target){
-        ans.push_back(v);
-        return;
-    }
-    else if(sum>target){
-        return;
-    }
-    else
-    {
-        v.push_back(nums[index]);
-        comb(nums,index,target,ans,sum+nums[index],v);
-        v.pop_back();
-        comb(nums,index+1,target,ans,sum,v);
-    }
-
+        //picking up
+        if(nums[index]<=target){
+            ans.push_back(nums[index]);
+            Comb_pair(index, target-nums[index],nums,ans,comb);
+            ans.pop_back();
+        }
+        Comb_pair(index+1, target, nums, ans, comb);
     }
     vector<vector<int>> combinationSum(vector<int>&nums, int target) {
-        vector<vector<int>> ans;
-        vector<int>v;
-        comb(nums,0,target,ans,0,v);
-        return ans;
+       vector<vector<int>>comb;
+       vector<int>ans;
+       Comb_pair(0,target,nums,ans,comb);
+       return comb;
     }
 };
