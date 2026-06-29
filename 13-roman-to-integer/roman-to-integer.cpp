@@ -7,7 +7,7 @@ public:
             {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}
         };
         for(int i=0;i<s.size();i++){
-          if(mp[s[i]]< mp[s[i+1]]){
+          if(i+1<s.size() && mp[s[i]]< mp[s[i+1]]){
             ans-=mp[s[i]];
           }
           else{
