@@ -13,9 +13,7 @@
 class Solution {
     struct NodeInfo {
         bool isBST;
-        int sum;
-        int mini;
-        int maxi;
+        int sum, mini, maxi;
     };
 
     int ans = 0;
