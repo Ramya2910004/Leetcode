@@ -3,38 +3,29 @@ using namespace std;
 
 class Solution {
 public:
+    int helper(string s, int i, long long num, int sign){
+        if(i>=s.size() || !isdigit(s[i])){
+            return (int)num*sign;
+        }
+        int digit=s[i]-'0';
+        if(num > INT_MAX/10 || (num==INT_MAX/10 && digit>7)){
+           return (sign==1)?INT_MAX:INT_MIN;
+            
+        }
+        num=num*10+digit;
+        return helper(s,i+1,num,sign);
+    }
     int myAtoi(string s) {
-        int n = s.size();
-        int i = 0;
-
-        // Skip leading spaces
-        while (i < n && s[i] == ' ') {
+        int n=s.size();
+        int i=0;
+        while(i<n && s[i]==' '){
             i++;
         }
-
-        // Handle sign
-        int sign = 1;
-        if (i < n && (s[i] == '-' || s[i] == '+')) {
-            sign = (s[i] == '-') ? -1 : 1;
+        int sign =1;
+        if(i<n && (s[i]=='-' || s[i]=='+')){
+            sign = (s[i]=='-')? -1:1;
             i++;
         }
-
-       long long res = 0;
-
-        // Process digits
-        while (i < n && isdigit(s[i])) {
-            int digit = s[i] - '0';
-
-            // Check overflow
-            if (res > INT_MAX / 10 ||
-                (res == INT_MAX / 10 && digit > (sign == 1 ? 7 : 8))) {
-                return sign == 1 ? INT_MAX : INT_MIN;
-            }
-
-            res = res * 10 + digit;
-            i++;
-        }
-
-        return sign * res;
+        return helper(s,i,0,sign);
     }
 };
