@@ -1,17 +1,17 @@
 class Solution {
 public:
    const int MOD = 1e9 + 7;
-    long long power(long long x, long long y){
-        long long res=1;
-        while(y>0){
-            if(y&1){
-                res=(res*x)%MOD;
-            }
-            x=(x*x)%MOD;
-            y=y>>1;
-        }
-        return res%MOD;
-    }
+    long long power(long long x, long long y) {
+    if (y == 0)
+        return 1;
+
+    long long half = power((x * x) % MOD, y / 2);
+
+    if (y % 2 == 0)
+        return half;
+
+    return (x * half) % MOD;
+}
     int countGoodNumbers(long long n) {
         long long a=1, b=1;
         if(n%2!=0){
